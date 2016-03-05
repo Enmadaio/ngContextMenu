@@ -57,7 +57,10 @@
                  * @property require
                  * @type {String}
                  */
-                require: '?ngModel',
+                require: [
+                    '?ngModel',
+                    '?offsetContainer'
+                ],
 
                 /**
                  * @method link
@@ -116,11 +119,13 @@
                         strategy = strategy || 'append';
 
                         if ('preventDefault' in event) {
+                            var offsetLeft = $(attributes.offsetContainer).offset().left - window.scrollX;
+                            var offsetTop = $(attributes.offsetContainer).offset().top - window.scrollY;
 
                             contextMenu.cancelAll();
                             event.stopPropagation();
                             event.preventDefault();
-                            scope.position = { x: event.clientX, y: event.clientY };
+                            scope.position = { x: event.clientX - offsetLeft, y: event.clientY - offsetTop};
 
                         } else {
 
@@ -143,6 +148,7 @@
                             menu.css({
 
                                 position: 'fixed',
+                                display: 'block',
                                 top: 0,
                                 left: 0,
                                 transform: $interpolate('translate({{x}}px, {{y}}px)')({
