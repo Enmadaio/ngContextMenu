@@ -119,8 +119,8 @@
                         strategy = strategy || 'append';
 
                         if ('preventDefault' in event) {
-                            var offsetLeft = $(attributes.offsetContainer).offset().left - window.scrollX;
-                            var offsetTop = $(attributes.offsetContainer).offset().top - window.scrollY;
+                            var offsetLeft = $(attributes.offsetContainer).offset().left - window.pageXOffset;
+                            var offsetTop = $(attributes.offsetContainer).offset().top - window.pageYOffset;
 
                             contextMenu.cancelAll();
                             event.stopPropagation();
