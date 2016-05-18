@@ -119,8 +119,9 @@
                         strategy = strategy || 'append';
 
                         if ('preventDefault' in event) {
-                            var offsetLeft = $(attributes.offsetContainer).offset().left - window.pageXOffset;
-                            var offsetTop = $(attributes.offsetContainer).offset().top - window.pageYOffset;
+                            var isIE = (~window.navigator.userAgent.indexOf('MSIE') || !!navigator.userAgent.match(/Trident.*rv\:11\./));
+                            var offsetLeft = isIE ? 0 : $(attributes.offsetContainer).offset().left - window.pageXOffset;
+                            var offsetTop = isIE ? 0 : $(attributes.offsetContainer).offset().top - window.pageYOffset;
 
                             contextMenu.cancelAll();
                             event.stopPropagation();
